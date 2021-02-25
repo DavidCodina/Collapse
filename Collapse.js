@@ -4,12 +4,14 @@ function Collapse(collapse, config){
 
   this._collapse      = collapse;
   this._config        = config || {};
-  this._collapsers    =
+  this._togglers      =
     [].slice.call(document.querySelectorAll('[data-bs-toggle="collapse"][data-bs-target="#' + collapse.id + '"]')).concat(
     [].slice.call(document.querySelectorAll('[data-bs-toggle="collapse"][href="#'           + collapse.id + '"]'))
   );
   this._animationTime = 350; // Based on the transition value of .collapsing, which is 350ms in bootstrap.css v5 beta2
   this._init          = this._init.bind(this);
+  this.show           = this.show.bind(this);
+  this.hide           = this.hide.bind(this);
   this.toggle         = this.toggle.bind(this);
   this.destroy        = this.destroy.bind(this);
 
@@ -26,8 +28,8 @@ Collapse.prototype._instances = [];
 
 
 Collapse.prototype._init = function(){
-  this._collapsers.forEach(collapser => {
-    collapser.addEventListener('click', this.toggle);
+  this._togglers.forEach(toggler => {
+    toggler.addEventListener('click', this.toggle);
   });
 };
 
@@ -42,8 +44,8 @@ Collapse.getInstances = function(){
 
 
 
-// Obviously, if you have a cached instance you don't need to get the instance.
-// This is for internal use only such that the contructor can do this:
+
+// For internal use only such that the contructor can do this:
 // Object.getPrototypeOf(this)._getInstance()
 // One could instead use Collapse.getInstance(), but it's better not
 // to rely on the actual constructor name.
@@ -55,6 +57,8 @@ Collapse.prototype._getInstance = function(element){
   }
   return null;
 };
+
+
 
 
 // Static getInstance
@@ -70,10 +74,9 @@ Collapse.getInstance = function(element){
 
 
 
-Collapse.prototype.toggle = function(e){
+Collapse.prototype.show = function(e){
   if (e){ e.preventDefault(); }
   const isShown  = this._collapse.classList.contains('show') || this._collapse.classList.contains('collapsing');
-
   if (!isShown){
     this._collapse.classList.remove('collapse');
     this._collapse.classList.add('collapsing');
@@ -86,7 +89,17 @@ Collapse.prototype.toggle = function(e){
     }, this._animationTime);
      this._collapse.style.height = this._collapse.scrollHeight + 'px';
   }
-  else {
+  return this;
+};
+
+
+
+
+Collapse.prototype.hide = function(e){
+  if (e){ e.preventDefault(); }
+  const isShown  = this._collapse.classList.contains('show') || this._collapse.classList.contains('collapsing');
+
+  if (isShown) {
     this._collapse.style.height = `${this._collapse.getBoundingClientRect().height}px`;
     void(this._collapse.offsetHeight); //force reflow.
     this._collapse.classList.add('collapsing');
@@ -97,17 +110,25 @@ Collapse.prototype.toggle = function(e){
       this._collapse.classList.add('collapse');
     }, this._animationTime);
   }
+  return this;
+};
+
+
+
+
+Collapse.prototype.toggle = function(e){
+  if (e){ e.preventDefault(); }
+  const isShown  = this._collapse.classList.contains('show') || this._collapse.classList.contains('collapsing');
+  if (!isShown){ this.show(); }
+  else {         this.hide(); }
 };
 
 
 
 
 Collapse.prototype.destroy = function(){
-  // Remove all associated event listeners.
-  this._collapsers.forEach(collapser => collapser.removeEventListener('click', this.toggle));
+  this._togglers.forEach(toggler => toggler.removeEventListener('click', this.toggle));
 
-  // Remove the associated instance from _instances.
-  // Array.map() and Array.indexOf are both supported by IE 9+.
   const instanceIndex = this._instances.map(instance => instance._collapse).indexOf(this._collapse);
   if (instanceIndex > -1){ this._instances.splice(instanceIndex, 1); }
   return this;

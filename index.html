@@ -12,7 +12,7 @@
 
 <body class="transition-none">
   <header>
-    <nav id="primary-navbar" class="navbar navbar-expand-sm navbar-dark">
+    <nav id="primary-navbar" class="navbar navbar-expand-md navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#!">Collapse (No bootstrap.js)</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu">
@@ -38,7 +38,6 @@
 
   <main class="py-5">
     <div class="container-fluid px-md-5">
-
       <article class="article">
         <h2 class="text-white-3d">Overview:</h2>
 
@@ -87,7 +86,8 @@
         <a href="https://jasonbutz.info/2017/11/bootstrap-v4-responsive-navbars-without-jquery" target="_blank">blog</a> by Jason Butz.
         It has been updated to be object-oriented. <code>Collapse.getInstances()</code>
         and <code>Collapse.getInstance()</code> were added as static methods.
-        <code>destroy()</code> was added as an instance method. It removes associated event listeners
+        <code>show()</code>, <code>hide()</code>, and <code>destroy()</code> were
+        added as instance methods. <code>destroy()</code> removes the associated event listeners
         and the the corresponding instance reference stored on the <code>prototype</code>.</p>
 
         <p><code>Collapse</code> instances were created for the nav menu as well as the example in the overview.</p>

@@ -3,10 +3,11 @@
 ============================================================================= */
 
 
-setTimeout(function(){ document.body.classList.remove('transition-none'); }, 1000);
+// Unrelated to current demo.
+setTimeout(function(){ document.body.classList.remove('transition-none'); }, 500);
 
 
-// Instantiate them one at a time...
+// Instantiate Collapse instances one at a time...
 // const collapseExample = new Collapse(document.querySelector('#collapse-example'));
 // const navMenu         = new Collapse(document.querySelector('#nav-menu'));
 
