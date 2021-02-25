@@ -84,9 +84,14 @@
 
 
         <p>This example is based off of code provided in the following
-          <a href="https://jasonbutz.info/2017/11/bootstrap-v4-responsive-navbars-without-jquery" target="_blank">blog</a> by Jason Butz.
-        It has been updated to be object-oriented. <code>Collapse</code> instances
-        were created for the two buttons above as well as the <code>.navbar-toggler</code> button.</p>
+        <a href="https://jasonbutz.info/2017/11/bootstrap-v4-responsive-navbars-without-jquery" target="_blank">blog</a> by Jason Butz.
+        It has been updated to be object-oriented. Also the original code built instances off of the <em>collapsers</em>
+        (i.e., links, buttons, etc.). This version correctly builds instances off of <code>.collapse</code> elements.
+        <code>Collapse.getInstances()</code> and <code>Collapse.getInstance()</code> were added as static methods.
+        <code>destroy()</code> was added as an instance method. It removes associated event listeners
+        and the the corresponding instance reference stored on the <code>prototype</code>.</p>
+
+        <p><code>Collapse</code> instances were created for the nav menu as well as the example in the overview.</p>
       </article>
     </div><!-- <div class="container"> -->
   </main>
@@ -98,6 +103,8 @@
 
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
+
+
   <script src="Collapse.js"></script>
   <script src="script.js"></script>
 </body>

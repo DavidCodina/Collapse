@@ -3,16 +3,15 @@
 ============================================================================= */
 
 
-// Instantiate them one at a time.
-// const navCollapseInstance    = new Collapse(document.querySelector('#primary-navbar .navbar-toggler'));
-// const collapseLinkInstance   = new Collapse(document.querySelector('#collapse-link'));
-// const collapseButtonInstance = new Collapse(document.querySelector('#collapse-button'));
+setTimeout(function(){ document.body.classList.remove('transition-none'); }, 1000);
+
+
+// Instantiate them one at a time...
+// const collapseExample = new Collapse(document.querySelector('#collapse-example'));
+// const navMenu         = new Collapse(document.querySelector('#nav-menu'));
 
 
 // Or all at once...
 const collapseInstances = [];
-const collapseElements  = document.querySelectorAll('[data-bs-toggle="collapse"]');
-collapseElements.forEach(el => { collapseInstances.push(new Collapse(el)); });
-
-
-setTimeout(function(){ document.body.classList.remove('transition-none'); }, 1000);
+const collapseElements  = document.querySelectorAll('.collapse');
+collapseElements.forEach(collapse => { collapseInstances.push(new Collapse(collapse)); });
